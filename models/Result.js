@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
 const { db } = require("./PVAParticipants");
 
+// TODO: remove pvaUser from here and the ref to participant (faster query participant wise)
+
 const schema = mongoose.Schema({
   pvaUser: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     ref: "PVAParticipants",
   },
   gameName: {

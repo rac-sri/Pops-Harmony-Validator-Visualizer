@@ -5,7 +5,8 @@ var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var app = express();
-const routes = require("./routes/PVAParticipant");
+const pva = require("./routes/PVAParticipant");
+const result = require("./routes/Results");
 const mongooose = require("mongoose");
 
 mongooose
@@ -22,7 +23,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/pvauser", routes);
+app.use("/pvauser", pva);
+app.use("/result", result);
 
 app.use(function (req, res, next) {
   next(createError(404));

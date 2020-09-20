@@ -7,6 +7,13 @@ const schema = mongoose.Schema({
     required: true,
     uniques: true,
   },
+  isPops: Boolean,
+  identity: String,
+  maxChangeRate: [Number],
+  maxTotalDelegation: [Number],
+  inCommunity: Boolean,
+  ActiveDuration: [Number],
+  CurrentlyActive: Number,
 });
 
 const PVAParticipants = mongoose.model("PVAParticipants", schema);

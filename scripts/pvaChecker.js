@@ -13,7 +13,6 @@ async function getInformationRpc(rpcEndpoint, method, params) {
       headers,
       data,
     });
-    console.log(result, "d23d32f");
     return result.data;
   } catch (err) {
     console.log(err);
@@ -156,7 +155,6 @@ async function getUrl(url) {
 
 async function postUrl(url, data) {
   const headers = { "Content-Type": "application/json" };
-  console.log(data);
   const response = await axios({
     url,
     headers,
@@ -245,12 +243,13 @@ async function testUpTime(OnChainPvaValidatorInfo) {
 const fs = require("fs");
 
 async function init() {
-  // const pvavalidators = await getPVADetails();
+  const pvavalidators = await getPVADetails();
+  console.log(pvavalidators);
   // fs.writeFileSync("validatosChain.json", JSIN.stringyfy(pvavalidators), "utf-8");
 
-  const validatorChain = require("./validatosChain.json");
+  //const validatorChain = require("./validatosChain.json");
   // // console.log(validatorChain[0].validator.address);
-  testUpTime(validatorChain);
+  //testUpTime(validatorChain);
 
   // createAllPvaUser();
   // CreateUptimeChallenge();
