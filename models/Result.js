@@ -15,11 +15,11 @@ const schema = mongoose.Schema({
     required: true,
     default: 0,
   },
-  meta : {
-      'indexes': [{'fields':{'pvaUser','gameName'},'unique':true}]
-  }
+  // meta: {
+  //   indexes: [{ fields: { pvaUser: "gameName" }, unique: true }],
+  // },
 });
 
-const model = mongoose.model("result",schema);
+const model = mongoose.model("result", schema);
 
-module.exports  = model;
+module.exports = model;
