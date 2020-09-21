@@ -1,4 +1,5 @@
 <h1 align="center">Welcome to Hamony Validator Visualizer 👋</h1>
+<div align="center">
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
   <a href="github" target="_blank">
@@ -8,6 +9,7 @@
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
 </p>
+</div>
 
 ### ✨ [Demo](github)
 
@@ -25,8 +27,9 @@ npm run start
 
 ## Todo
 
-- Storing uptime duration and its visualization.
-- Refactoring the schema to point from the participant to the challenge (game).
+- Storing uptime **duration** and its visualization.
+- Code Refactoring ( mainly frontend )
+- Adding Graphical Visualization
 
 ## Author
 

@@ -10,10 +10,27 @@ router.get("/", async function (req, res) {
   res.end();
 });
 
+router.get("/getAll", async function (req, res) {
+  const data = await PVAParticipants.find({})
+    .populate({
+      path: "games",
+      model: "results",
+    })
+    .exec();
+  console.log(data);
+  res.status(200).send(data);
+});
+
 router.get("/:pvadd", async function (req, res) {
   const data = await PVAParticipants.findOne({
     validatorAddress: req.params.pvadd,
-  }).populate("results");
+  })
+    .populate({
+      path: "games",
+      model: "results",
+    })
+    .exec();
+  console.log(data);
   res.status(200).send(data);
 });
 

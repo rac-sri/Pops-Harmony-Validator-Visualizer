@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  color: #00f;
+}
+
+.MuiButton-contained {
+  background-color: blue !important;
+}

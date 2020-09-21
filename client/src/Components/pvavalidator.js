@@ -42,7 +42,7 @@ export default function CustomizedTables({ data }) {
   console.log(data);
   const row = data;
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="customized table">
           <TableBody>

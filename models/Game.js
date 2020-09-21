@@ -6,7 +6,7 @@ const { db } = require("./PVAParticipants");
 const schema = mongoose.Schema({
   pvaUser: {
     type: String,
-    ref: "PVAParticipants",
+    ref: "pvaparticipants",
   },
   gameName: {
     type: String,
@@ -19,6 +19,6 @@ const schema = mongoose.Schema({
   },
 });
 
-const model = mongoose.model("result", schema);
+const model = mongoose.model("results", schema);
 
 module.exports = model;

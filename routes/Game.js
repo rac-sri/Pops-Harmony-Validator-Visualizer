@@ -18,10 +18,9 @@ router.get("/:gamename", async (req, res) => {
 router.post("/", async (req, res) => {
   const body = req.body;
   const search = await Game.create(body);
-  console.log(search);
   const addToParticipant = await PVAParticipants.findOneAndUpdate(
     { validatorAddress: body.pvaUser },
-    { $push: { games: { gameName: search.id } } },
+    { $push: { games: search.id } },
     { new: true }
   );
   console.log(addToParticipant);
@@ -38,15 +37,6 @@ router.get("/:pvaid/Game/:challengename", async (req, res) => {
   res.end();
 });
 
-router.put("/:pvaid/Game/:challengename", async (req, res) => {
-  const body = req.body;
-  Game.findOneAndUpdate(
-    { pvaUser: req.query.pvaid, gameName: req.query.challengename },
-    body
-  );
-  res.status(200).send({ result: "ok" });
-});
-
 router.get("/add/:pvaadd/Game/:challengename", async (req, res) => {
   const pvaid = await PVAParticipants.findOne({
     validatorAddress: req.params.pvaadd,
@@ -60,16 +50,15 @@ router.get("/add/:pvaadd/Game/:challengename", async (req, res) => {
 
 router.put("/add/:pvaadd/Game/:challengename", async (req, res) => {
   const body = req.body;
-  console.log(body);
+  console.log(req.params);
 
-  const pvaobj = await PVAParticipants.findOne({
-    validatorAddress: req.params.pvaadd,
+  const data = await Game.findOne({
+    pvaUser: req.params.pvaadd,
+    gameName: req.params.challengename,
   });
-
-  console.log(pvaobj);
-
+  console.log(data);
   const result = await Game.findOneAndUpdate(
-    { pvaUser: pvaobj.validatorAddress, gameName: req.params.challengename },
+    { pvaUser: req.params.pvaadd, gameName: req.params.challengename },
     body,
     { new: true }
   );

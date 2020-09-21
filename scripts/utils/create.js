@@ -24,4 +24,19 @@ function CreateUptimeChallenge(pvaList) {
   }
 }
 
-module.exports = { CreateUptimeChallenge, createAllPvaUser };
+function CreatenewGameChallenge(pvaList) {
+  for (pvauser of pvaList) {
+    data = {
+      pvaUser: pvauser.address,
+      gameResult: 0,
+      gameName: "newgame",
+    };
+    postUrl("http://localhost:5000/result", data);
+  }
+}
+
+module.exports = {
+  CreateUptimeChallenge,
+  createAllPvaUser,
+  CreatenewGameChallenge,
+};

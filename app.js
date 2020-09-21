@@ -9,9 +9,12 @@ const pva = require("./routes/PVAParticipant");
 const result = require("./routes/Game");
 const mongooose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config();
+
+console.log(process.env.mongodburl);
 
 mongooose
-  .connect("mongodb://localhost:27017/pva", {
+  .connect(process.env.mongodburl, {
     useNewUrlParser: true,
     useFindAndModify: false,
   })

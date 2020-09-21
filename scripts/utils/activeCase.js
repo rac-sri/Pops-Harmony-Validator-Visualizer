@@ -1,15 +1,15 @@
 const axios = require("axios");
 
-const active = async () => {
+const active = async (pvauser) => {
   const uptimePoints = await getUrl(
-    `http://localhost:5000/result/add/${pvauser["address"]}/results/uptime`
+    `http://localhost:5000/result/add/${pvauser["address"]}/Game/uptime`
   );
 
   const newPoints = parseInt(uptimePoints.data["gameResult"]) + 1;
-  data = { gameResult: newPoints };
+  const data = { gameResult: newPoints };
 
   const update = await putUrl(
-    `http://localhost:5000/result/add/${pvauser["address"]}/results/uptime`,
+    `http://localhost:5000/result/add/${pvauser["address"]}/Game/uptime`,
     data
   );
   console.log(

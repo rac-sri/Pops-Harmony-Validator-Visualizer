@@ -14,14 +14,12 @@ const schema = mongoose.Schema({
   CurrentlyActive: Number,
   games: [
     {
-      gameName: {
-        type: mongoose.Types.ObjectId,
-        ref: "results",
-      },
+      type: mongoose.Types.ObjectId,
+      ref: "results",
     },
   ],
 });
 
-const PVAParticipants = mongoose.model("PVAParticipants", schema);
+const PVAParticipants = mongoose.model("pvaparticipants", schema);
 
 module.exports = PVAParticipants;

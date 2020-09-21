@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -9,11 +10,7 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import IconButton from "@material-ui/core/IconButton";
-import FirstPageIcon from "@material-ui/icons/FirstPage";
-import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
-import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
-import LastPageIcon from "@material-ui/icons/LastPage";
+
 import Container from "@material-ui/core/Container";
 import TableHead from "@material-ui/core/TableHead";
 import TablePaginationActions from "./Container/TablePagination";
@@ -32,14 +29,13 @@ function createData(arr = []) {
   const finalData = arr
     .map((value) => {
       const data = {
-        uptime: value.uptime,
-        newGame: value.newGame,
-        pvaUser: value.PVAParticipant,
-        total: value.uptime + value.newGame,
+        GameResult: value.gameResult,
+        GameName: value.gameName,
+        pvaUser: value.pvaUser,
       };
       return data;
     })
-    .sort((a, b) => (a.total < b.total ? 1 : -1));
+    .sort((a, b) => (a.GameResult < b.GameResult ? 1 : -1));
   return finalData;
 }
 
@@ -49,30 +45,21 @@ const useStyles2 = makeStyles({
   },
 });
 
-const Component = React.memo(function TableWrap({ data }) {
+const Component = React.memo(function TableWrap() {
   const classes = useStyles2();
+  const [game, updateGame] = useState("uptime");
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
+  const [data, updateData] = React.useState([]);
 
-  let updateData = [];
-  if (data.length != 0) {
-    updateData = data.map((value) => {
-      const data = {
-        PVAParticipant: value.validatorAddress,
-        uptime:
-          value.games[0].gameName == "uptime"
-            ? value.games[0].gameResult
-            : value.games[1].gameResult,
-        newGame:
-          value.games[0].gameName == "uptime"
-            ? value.games[1].gameResult
-            : value.games[0].gameResult,
-      };
-      return data;
-    });
-  }
-
-  const rows = createData(updateData);
+  useEffect(() => {
+    async function fetch() {
+      const newdata = await axios.get(`http://localhost:5000/result/${game}`);
+      updateData(newdata);
+    }
+    fetch();
+  }, []);
+  const rows = createData(data.data);
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -86,15 +73,13 @@ const Component = React.memo(function TableWrap({ data }) {
   };
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="md">
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead>
             <TableRow>
               <StyledTableCell>PVA User Address</StyledTableCell>
-              <StyledTableCell align="right">Uptime</StyledTableCell>
-              <StyledTableCell align="right">NewGame</StyledTableCell>
-              <StyledTableCell align="right">Total</StyledTableCell>
+              <StyledTableCell align="right">Game Score</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -106,14 +91,9 @@ const Component = React.memo(function TableWrap({ data }) {
                 <TableCell component="th" scope="row">
                   {row.pvaUser}
                 </TableCell>
+
                 <TableCell style={{ width: 160 }} align="right">
-                  {row.uptime}
-                </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {row.newGame}
-                </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
-                  {row.total}
+                  {row.GameResult}
                 </TableCell>
               </TableRow>
             ))}

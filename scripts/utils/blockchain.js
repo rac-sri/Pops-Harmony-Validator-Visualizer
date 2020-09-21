@@ -28,7 +28,6 @@ async function getLatestChainHeadersRPCUrl(rpcurl) {
 }
 
 async function getValidatorInfoRpc(validator, rpcurl) {
-  console.log("yoyo");
   const result = await getInformationRpc(
     rpcurl,
     "hmyv2_getAllValidatorInformation",
@@ -38,7 +37,6 @@ async function getValidatorInfoRpc(validator, rpcurl) {
 }
 
 async function getAllValidatorInfoRpc(rpcurl) {
-  console.log("yoyo");
   const result = await getInformationRpc(
     rpcurl,
     "hmyv2_getAllValidatorInformation",
