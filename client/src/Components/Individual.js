@@ -43,7 +43,6 @@ export default function Individual() {
         <Button
           variant="contained"
           color="#0a93eb"
-          href="#contained-buttons"
           onClick={() => fetchDataByPVA()}
         >
           Search
