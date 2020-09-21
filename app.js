@@ -25,9 +25,12 @@ app.use(logger());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "build")));
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.sendFile("index.html");
+});
 app.use("/pvauser", pva);
 app.use("/result", result);
 

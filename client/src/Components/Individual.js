@@ -9,7 +9,7 @@ export default function Individual() {
   const [collection, updateCollection] = useState({});
   const [snackbar, viewSnackBar] = useState(false);
   const fetchDataByPVA = async () => {
-    const data = await axios.get(`http://localhost:5000/pvauser/${value}/`);
+    const data = await axios.get(`/pvauser/${value}/`);
     if (data.status == 200) updateCollection(data.data);
     else viewSnackBar(true);
   };

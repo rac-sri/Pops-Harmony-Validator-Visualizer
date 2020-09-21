@@ -54,7 +54,7 @@ const Component = React.memo(function TableWrap() {
   const [data, updateData] = React.useState([]);
 
   async function fetch() {
-    const newdata = await axios.get(`http://localhost:5000/result/${game}`);
+    const newdata = await axios.get(`/result/${game}`);
     updateData(newdata);
   }
 
@@ -88,9 +88,6 @@ const Component = React.memo(function TableWrap() {
         onChange={handleChange}
         label="Game"
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
         <MenuItem value="uptime">Uptime</MenuItem>
         <MenuItem value="newgame">NewGame</MenuItem>
       </Select>
