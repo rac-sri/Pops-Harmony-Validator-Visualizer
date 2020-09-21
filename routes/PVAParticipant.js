@@ -1,14 +1,20 @@
 var express = require("express");
 var router = express.Router();
 const PVAParticipants = require("../models/PVAParticipants");
-const Results = require("../models/Result");
+const Results = require("../models/Game");
 
 router.get("/", async function (req, res) {
-  console.log("deqwundwoiq");
   const data = await PVAParticipants.find({});
   console.log(data);
   res.send(data);
   res.end();
+});
+
+router.get("/:pvadd", async function (req, res) {
+  const data = await PVAParticipants.findOne({
+    validatorAddress: req.params.pvadd,
+  }).populate("results");
+  res.status(200).send(data);
 });
 
 router.post("/", async function (req, res) {

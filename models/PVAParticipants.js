@@ -7,13 +7,19 @@ const schema = mongoose.Schema({
     required: true,
     uniques: true,
   },
-  isPops: Boolean,
   identity: String,
-  maxChangeRate: [Number],
-  maxTotalDelegation: [Number],
-  inCommunity: Boolean,
+  maxChangeRate: Number,
+  maxTotalDelegation: Number,
   ActiveDuration: [Number],
   CurrentlyActive: Number,
+  games: [
+    {
+      gameName: {
+        type: mongoose.Types.ObjectId,
+        ref: "results",
+      },
+    },
+  ],
 });
 
 const PVAParticipants = mongoose.model("PVAParticipants", schema);

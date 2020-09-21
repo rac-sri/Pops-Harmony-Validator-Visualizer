@@ -6,8 +6,9 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var app = express();
 const pva = require("./routes/PVAParticipant");
-const result = require("./routes/Results");
+const result = require("./routes/Game");
 const mongooose = require("mongoose");
+const cors = require("cors");
 
 mongooose
   .connect("mongodb://localhost:27017/pva", {
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(cors());
 
 app.use("/pvauser", pva);
 app.use("/result", result);
