@@ -10,14 +10,15 @@ import TableFooter from "@material-ui/core/TableFooter";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import Container from "@material-ui/core/Container";
 import TableHead from "@material-ui/core/TableHead";
 import TablePaginationActions from "./Container/TablePagination";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#0a93eb",
     color: theme.palette.common.white,
   },
   body: {
@@ -52,13 +53,15 @@ const Component = React.memo(function TableWrap() {
   const [rowsPerPage, setRowsPerPage] = React.useState(12);
   const [data, updateData] = React.useState([]);
 
+  async function fetch() {
+    const newdata = await axios.get(`http://localhost:5000/result/${game}`);
+    updateData(newdata);
+  }
+
   useEffect(() => {
-    async function fetch() {
-      const newdata = await axios.get(`http://localhost:5000/result/${game}`);
-      updateData(newdata);
-    }
     fetch();
-  }, []);
+  }, [game]);
+
   const rows = createData(data.data);
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -72,8 +75,25 @@ const Component = React.memo(function TableWrap() {
     setPage(0);
   };
 
+  const handleChange = (e) => {
+    updateGame(e.target.value);
+  };
+
   return (
     <Container maxWidth="md">
+      <Select
+        labelId="demo-simple-select-outlined-label"
+        id="demo-simple-select-outlined"
+        value={game}
+        onChange={handleChange}
+        label="Game"
+      >
+        <MenuItem value="">
+          <em>None</em>
+        </MenuItem>
+        <MenuItem value="uptime">Uptime</MenuItem>
+        <MenuItem value="newgame">NewGame</MenuItem>
+      </Select>
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label="custom pagination table">
           <TableHead>

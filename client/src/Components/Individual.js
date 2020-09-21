@@ -42,7 +42,7 @@ export default function Individual() {
         <br />
         <Button
           variant="contained"
-          color="primary"
+          color="#0a93eb"
           href="#contained-buttons"
           onClick={() => fetchDataByPVA()}
         >

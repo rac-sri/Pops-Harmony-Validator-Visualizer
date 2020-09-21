@@ -7,7 +7,7 @@ const Header = () => {
     <>
       <div
         style={{
-          backgroundColor: "blue",
+          backgroundColor: "#0a93eb",
           height: "10vh",
           display: "flex",
           padding: "1vw",
