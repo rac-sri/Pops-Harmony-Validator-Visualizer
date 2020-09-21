@@ -2,6 +2,9 @@ const { postUrl } = require("./activeCase");
 
 function createAllPvaUser(pvaList) {
   for (pvauser of pvaList) {
+    if (pvauser.address === /^Bubz/) {
+      continue;
+    }
     data = {
       name: pvauser.name,
       validatorAddress: pvauser.address,
