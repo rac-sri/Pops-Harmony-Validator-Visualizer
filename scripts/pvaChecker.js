@@ -61,14 +61,15 @@ async function testUpUsingDummyDataTime(
 }
 
 async function init() {
-  const validatorChain = require("./validatosChain.json");
-  const chain = require("./chainValidatorListTesting.json");
+  //const validatorChain = require("./validatosChain.json");
+  //const chain = require("./chainValidatorListTesting.json");
   // await createAllPvaUser(validatorChain);
   // await CreateUptimeChallenge(validatorChain);
   // await CreatenewGameChallenge(validatorChain);
 
-  // const getPva = await getPVADetails();
-  testUpUsingDummyDataTime(validatorChain, chain);
+  const getPva = await getPVADetails();
+  console.log(getPva);
+  //testUpUsingDummyDataTime(validatorChain, chain);
   // console.log(process.argv);
   // const validator = process.argv[2];
   // const nodeurl = process.argv[3];
